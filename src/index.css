@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html body {
+  width: 100%;
+  min-height: 100%;
+}
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+body * {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  font-size: 30rpx;
+}
+
+body {
+  font-family: PingFangSC-Regular, Roboto, Helvetica Neue, Helvetica, Tahoma,
+    Arial, PingFang SC-Light, Microsoft YaHei;
+}
