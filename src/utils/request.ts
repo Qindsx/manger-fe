@@ -5,8 +5,8 @@ const TOKEN_INVALID = 'Token认证失败，请重新登录';
 
 // 创建axios 添加全局配置
 const instance = axios.create({
-  baseURL: 'http://127.0.0.1:4523/m1/1977336-0-default', //本地MOCK
-  // baseURL: 'http://localhost:8080',
+  // baseURL: 'http://127.0.0.1:4523/m1/1977336-0-default', //本地MOCK
+  baseURL: 'http://localhost:3001/api',
   timeout: 10000,
 });
 

@@ -7,8 +7,8 @@ import { useUserStore } from '../store/';
 
 const router = useRouter();
 const formData = reactive({
-  username: '',
-  password: '',
+  username: 'admin',
+  password: '123456',
 });
 
 const loginRef = ref<FormInstance>();
