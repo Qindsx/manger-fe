@@ -23,7 +23,7 @@ const onLogin = async (loginRef: FormInstance | undefined) => {
       router.push('/home');
     }
   });
-};
+};   
 
 const rules = reactive<FormRules>({
   username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
