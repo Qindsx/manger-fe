@@ -1,9 +1,35 @@
 <script setup lang="ts">
 import { Operation, Bell } from '@element-plus/icons-vue';
+import { useSidebarStore, useUserStore } from '../../store';
+import { useRouter } from 'vue-router';
+import { ElMessage, ElMessageBox } from 'element-plus';
 
-const onOpenMenu = ()=>{
-  
-}
+const sidebarStore = useSidebarStore();
+const onOpenMenu = () => {
+  sidebarStore.handleCollapse();
+};
+
+const router = useRouter();
+const onQuit = () => {
+  ElMessageBox.confirm('确认退出登录吗？', 'Warning', {
+    confirmButtonText: 'OK',
+    cancelButtonText: 'Cancel',
+    type: 'warning',
+  })
+    .then(() => {
+      ElMessage({
+        type: 'success',
+        message: '退出成功',
+      });
+      router.push('/login');
+    })
+    .catch(() => {
+      ElMessage({
+        type: 'info',
+        message: '取消退出',
+      });
+    });
+};
 </script>
 
 <template>
@@ -46,9 +72,9 @@ const onOpenMenu = ()=>{
           <el-dropdown-menu>
             <el-dropdown-item>Action 1</el-dropdown-item>
             <el-dropdown-item>Action 2</el-dropdown-item>
-            <el-dropdown-item>Action 3</el-dropdown-item>
-            <el-dropdown-item disabled>Action 4</el-dropdown-item>
-            <el-dropdown-item divided>Action 5</el-dropdown-item>
+            <el-dropdown-item @click="onQuit" divided
+              >退出登录</el-dropdown-item
+            >
           </el-dropdown-menu>
         </template>
       </el-dropdown>
