@@ -12,4 +12,8 @@ export interface UserState {
   ruleId?: RoleType;
   deptID?: string[];
   state?: StateType;
+  role?: Number;
+  createTime?: String;
+  lastUpdateTime?: String;
+  _id?: String;
 }

@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { userRepository } from '../service';
+import { login } from '../service';
 import { FormRules, FormInstance } from 'element-plus';
 import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useUserStore } from '../store/';
+import { setToken } from '../utils/auth';
 
 const router = useRouter();
 const formData = reactive({
@@ -18,12 +19,15 @@ const onLogin = async (loginRef: FormInstance | undefined) => {
   if (!loginRef) return;
   await loginRef.validate(async (valid, fields) => {
     if (valid) {
-      const res = await userRepository.login(formData);
-      useStore.saveUeerInfo(res.data);
+      // const res = await userRepository.login(formData);
+      const res = await login(formData);
+      console.log(res);
+      useStore.saveUserInfo(res.data);
+      setToken(res.data.token);
       router.push('/home');
     }
   });
-};   
+};
 
 const rules = reactive<FormRules>({
   username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],

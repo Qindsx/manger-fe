@@ -13,6 +13,9 @@ export const useUserStore = defineStore('user', {
     ruleId: undefined,
     deptID: undefined,
     state: undefined,
+    createTime: undefined,
+    lastUpdateTime: undefined,
+    _id: undefined,
   }),
   getters: {
     userProfile(state: UserState): UserState {
@@ -20,9 +23,15 @@ export const useUserStore = defineStore('user', {
     },
   },
   actions: {
-    saveUeerInfo(partial: Partial<UserState>) {
+    // 保存用户信息
+    saveUserInfo(partial: Partial<UserState>) {
       this.$patch(partial);
       console.log(partial);
     },
+    // 清除用户信息
+    clearUserUnfo() {
+      this.$reset();
+    },
+    // 保存
   },
 });

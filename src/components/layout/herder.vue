@@ -1,10 +1,14 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue';
 import { Operation, Bell } from '@element-plus/icons-vue';
 import { useSidebarStore, useUserStore } from '../../store';
 import { useRouter } from 'vue-router';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { getMessageNum } from '../../service';
+import {clearToken} from '../../utils/auth'
 
 const sidebarStore = useSidebarStore();
+const userStore = useUserStore();
 const onOpenMenu = () => {
   sidebarStore.handleCollapse();
 };
@@ -21,6 +25,8 @@ const onQuit = () => {
         type: 'success',
         message: '退出成功',
       });
+      clearToken()
+      userStore.clearUserUnfo();
       router.push('/login');
     })
     .catch(() => {
@@ -30,6 +36,13 @@ const onQuit = () => {
       });
     });
 };
+
+const messageNum = ref(0);
+onMounted(async () => {
+  const res = await getMessageNum();
+  messageNum.value = res.data.messageNum;
+});
+// const message
 </script>
 
 <template>
@@ -44,7 +57,7 @@ const onQuit = () => {
     <el-tooltip
       class="box-item"
       effect="dark"
-      content="Bottom Center prompts info"
+      :content="`you have ${messageNum} messages`"
       placement="bottom"
     >
       <div class="">
